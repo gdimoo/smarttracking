@@ -4,8 +4,24 @@ import * as Font from 'expo-font';
 import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import LoginScreen from './screens/LoginScreen';
+import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
+
+// const config = require('./config')
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyBP7uJQlit-vtNBUBsc_9oTBhn2HHjr6Dc",
+    authDomain: "smarttracking-122ba.firebaseapp.com",
+    databaseURL: "https://smarttracking-122ba.firebaseio.com",
+    projectId: "smarttracking-122ba",
+    storageBucket: "",
+    messagingSenderId: "729228013513",
+    appId: "1:729228013513:web:4d24033b6e609949f74218"
+  };
+
+  firebase.initializeApp(firebaseConfig);
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);

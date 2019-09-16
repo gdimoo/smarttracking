@@ -84,6 +84,7 @@ MapStack.navigationOptions = {
 
 MapStack.path = '';
 
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
