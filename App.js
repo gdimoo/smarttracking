@@ -23,6 +23,18 @@ import AppNavigator from './navigation/AppNavigator';
 
   firebase.initializeApp(firebaseConfig);
 
+  // firebase.database().ref('users/001').set(
+  //   {
+  //     name: 'test tila',
+  //     age: 21
+  //   }
+  // ).then(()=> {
+  //   console.log('INSERT!');
+  // }).catch((error)=>{
+  //   console.log(error);
+  // });
+
+
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 

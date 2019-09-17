@@ -1,30 +1,33 @@
-import React from 'react';
-import { 
-  View, 
-  Text, 
-  StyleSheet, 
-  Platform,
+
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
   TextInput,
-  TouchableOpacity,
+  Button,
+  TouchableHighlight,
+  Image,
+  Alert,
+  Dimensions,
   InteractionManager,
- } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+} from 'react-native';
 import firebase from 'firebase'
 import * as FirebaseAPI from '../modules/firebaseAPI';
+import { MonoText } from '../components/StyledText';
+const {width} = Dimensions.get('screen');
 
-
-export default class LoginScreen extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  static navigationOptions = {
-    title: 'Login',
+export default class SignUpView extends Component {
+static navigationOptions = {
+    header: null,
   };
+  constructor(props) {
+    super(props);}
+   
 
   state = {
-    email: "Enter email",
-    password: "Enter password"
+    email: "",
+    password: ""
   };
 
   
@@ -40,10 +43,10 @@ export default class LoginScreen extends React.Component {
           }
         });
       }
+  
 
-
-  // createUser() {
-  //   FirebaseAPI.createUser(this.state.email, this.state.password)
+  // onClickListener = (viewId) => {
+  //   Alert.alert("Alert", "Button pressed "+viewId);
   // }
   signUp(navigation) {
     console.log('signup() called', navigation)
@@ -59,41 +62,46 @@ export default class LoginScreen extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
-          
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Login Below</Text>
-          <TextInput 
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({email: text})}
-            value={this.state.email}
-          />
-          <TextInput 
-            style={styles.textInput}
-            onChangeText={(text) => this.setState({password: text})}
-            value={this.state.password}
-          />
+        <Text style={styles.name}>Smart Tracking</Text>
+        <View style={styles.getStartedContainer}>
 
-          <TouchableOpacity
-            style={{marginTop: '5%'}}
-            onPress={() => this.signIn()}
-          >
-            <View>
-              <Text>Log In</Text>
-            </View>
-          </TouchableOpacity>
-
-
-          <TouchableOpacity
-            style={{marginTop: '5%'}}
-            onPress={() => this.signUp(this.props.navigation)}
-          >
-            <View>
-              <Text>Signup</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+          <Image source={require('../assets/images/mail.png')} style={styles.logo} 
+    />
       </View>
+       
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Email"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({email: text})}
+              value={this.state.email}
+              />
+        </View>
+        
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Password"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(text) => this.setState({password: text})}
+             value={this.state.password}
+              
+              />
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signIn()}>
+          <Text style={styles.signUpText}>Sign in</Text>
+        </TouchableHighlight>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signUp(this.props.navigation)}>
+          <Text style={styles.signUpText}>sign up</Text>
+        </TouchableHighlight>
+      </View>
+      
     );
   }
 }
@@ -101,25 +109,64 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
-  textContainer: {
-    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 50,
-    paddingTop: '50%',
+    backgroundColor: '#FDCD00',
   },
-  textInput: {
-    fontSize: 17,
-    lineHeight: 24,
-    width: '75%',
+  inputContainer: {
+      borderBottomColor: '#009688',
+      backgroundColor: '#FFFFFF',  
+      borderRadius:30,
+      borderBottomWidth: 1,
+      width:250,
+      height:45,
+      marginBottom:20,
+      flexDirection: 'row',
+      alignItems:'center'
   },
-  text: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    width: '75%',
-    marginBottom: '10%',
-    textAlign: 'center',
+  inputs:{
+      height:45,
+      marginLeft:16,
+      borderBottomColor: '#FFFFFF',
+      flex:1,
   },
+  inputIcon:{
+    width:30,
+    height:30,
+    marginLeft:15,
+    justifyContent: 'center'
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20,
+    width:250,
+    borderRadius:30,
+  },
+  getStartedContainer: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+  },
+  homeScreenFilename: {
+    marginVertical: 7,
+  },
+  signupButton: {
+    backgroundColor: "#009688",
+  },
+  signUpText: {
+    color: 'white',
+  },
+  logo: {
+    width:250,
+    height:250,
+  },
+  name:{
+    marginTop:10,
+    fontSize:50,
+    color:"#583535"
+ 
+  }
 });
+ 
