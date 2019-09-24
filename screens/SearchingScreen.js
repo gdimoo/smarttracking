@@ -1,70 +1,145 @@
-import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { Component } from 'react'
+  import {
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    ActivityIndicator,
+    WebView
+  } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
-
-export default class SearchingScreen extends React.Component {
-    static navigationOptions = {
-      header: null,
-    };
- render() {
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
-            <Text>Smart Tracking</Text>
-          </View>
-
-          {/* <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles.getStartedText}>Get started by opening</Text>
-
-            <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-              <MonoText style={styles.codeHighlightText}>screens/HomeScreen.js</MonoText>
-            </View>
-
-            <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View> */}
-
-          {/* <View style={styles.helpContainer}>
-            <TouchableOpacity onPress={this._handleHelpPress} style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
-            </TouchableOpacity>
-          </View> */}
-        </ScrollView>
-
-        <View style={styles.tabBarInfoContainer}>
-          <TouchableOpacity onPress={() => {this.logout(this.props.navigation)}}>
-            <Text style={styles.tabBarInfoText}>Logout</Text>
-          </TouchableOpacity>
-        </View>
+const WebViewExample = () => {
+   return (
+      <View style = {styles.container}>
+         <WebView
+         source = {{ uri:
+         'https://mannatureairpurifier.com/tracking' }}
+         />
       </View>
-    );
-  }
-
-
-  _handleLearnMorePress = () => {
-    WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
-  };
-
-  _handleHelpPress = () => {
-    WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
-    );
-  };
+   )
 }
+export default WebViewExample;
+
+
+// import * as WebBrowser from 'expo-web-browser';
+// import React from 'react';
+
+// import { MonoText } from '../components/StyledText';
+
+// export default class SearchingScreen extends React.Component {
+//     static navigationOptions = {
+//       header: null,
+//     };
+//     constructor(props){
+//       super(props);
+//       this.state = {
+//         isLoading: true,
+//         dataSource: null,
+//       }
+
+//     }
+//      componentDidMount(){
+//       return fetch('https://trackapi.thailandpost.co.th/post/api/v1/authenticate/token', {
+//         method: 'POST',
+//         headers: {
+//           'Authorization':'Token D3IaHaF:A3H+NqE7DRPvSWWURxSWHANkUwOgKMO^DOKtX8JZC:AAS.J0N9DAW9AbJBZENiDsMsCKU3M*ZJM#N^SgLlPTL|Y=A^OR',
+//         'Content-Type': 'application/json',
+//         }
+//       })
+//       .then((response) => response.json() )
+//       .then((responseData) =>{
+//         console.log("REsult HERE:", responseData)
+//         this.setState({
+//           isLoading:false,
+//           dataSource:responseJson,
+          
+//         })
+        
+//       })
+
+//       .catch((error) => {
+//         console.log(error)
+//       });
+
+
+//     }
+//  render() {
+//     if(this.state.isLoading){
+//       return(
+//         <View style={styles.container}>
+//           <ActivityIndicator/>
+//         </View>
+//       )
+//     }
+//     else{
+//       // let movies = this.state.dataSource.map((val,key) =>{
+//       //   return <View key={key} style={styles.item}><Text>{val.message}</Text></View>
+//       // });
+//     return (
+//         // <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+//       <View style={styles.welcomeContainer}>
+//         <Text>TEST</Text>
+
+//       </View>
+//       //  </ScrollView> 
+//     );
+//   }
+// }
+
+//     componentDidMount(){
+//       return fetch('https://facebook.github.io/react-native/movies.json')
+//       .then((response) => response.json() )
+//       .then((responseJson) =>{
+//         this.setState({
+//           isLoading:false,
+//           dataSource:responseJson.movies,
+          
+//         })
+        
+//       })
+
+//       .catch((error) => {
+//         console.log(error)
+//       });
+
+
+//     }
+//  render() {
+//     if(this.state.isLoading){
+//       return(
+//         <View style={styles.container}>
+//           <ActivityIndicator/>
+//         </View>
+//       )
+//     }
+//     else{
+//       let movies = this.state.dataSource.map((val,key) =>{
+//         return <View key={key} style={styles.item}><Text>{val.title}</Text></View>
+//       });
+//     return (
+        
+//       <View style={styles.container}>
+//         {movies}
+
+//       </View>
+//     );
+//   }
+// }
+
+
+//   _handleLearnMorePress = () => {
+//     WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/guides/development-mode');
+//   };
+
+//   _handleHelpPress = () => {
+//     WebBrowser.openBrowserAsync(
+//       'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes'
+//     );
+//   };
+// }
 
 const styles = StyleSheet.create({
   container: {
@@ -74,6 +149,13 @@ const styles = StyleSheet.create({
     fontSize: 40,
     lineHeight: 19,
     textAlign: 'center',
+  },
+  item:{
+    flex:1,
+    alignSelf:'stretch',
+    margin:10,
+    alignItems:'center',
+    borderBottomWidth:1,
   },
   developmentModeText: {
     color: '#85483F',
