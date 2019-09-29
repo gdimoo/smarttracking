@@ -12,9 +12,7 @@ import {
   YellowBox
 } from 'react-native';
 
-construct() {
   YellowBox.ignoreWarnings(['Setting a timer']);
-}
 
 // const config = require('./config')
 
