@@ -4,17 +4,12 @@ import {
   Text,
   View,
   TextInput,
-  Button,
-  TouchableHighlight,
   Image,
-  Alert,
   Dimensions,
-  InteractionManager,
   TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase'
 import * as FirebaseAPI from '../modules/firebaseAPI';
-import { MonoText } from '../components/StyledText';
 const {width} = Dimensions.get('screen');
 
 export default class LoginScreen extends React.Component {
@@ -69,7 +64,6 @@ export default class LoginScreen extends React.Component {
           <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/ios/50/000000/name.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="First name - Last name"
-              // keyboardType="default"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({name: text})}
               value={this.state.name}
@@ -89,7 +83,6 @@ export default class LoginScreen extends React.Component {
           <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/ios/50/000000/home-page.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="address"
-              // keyboardType = "default"
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({address: text})}
               value={this.state.address}

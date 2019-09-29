@@ -24,7 +24,6 @@ static navigationOptions = {
   constructor(props) {
     super(props);}
    
-
   state = {
     email: "",
     password: ""
@@ -43,11 +42,7 @@ static navigationOptions = {
           }
         });
       }
-  
 
-  // onClickListener = (viewId) => {
-  //   Alert.alert("Alert", "Button pressed "+viewId);
-  // }
   signUp(navigation) {
     console.log('signup() called', navigation)
 

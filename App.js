@@ -8,11 +8,11 @@ import LoginScreen from './screens/LoginScreen';
 import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
-import {
-  YellowBox
-} from 'react-native';
+// import {
+//   YellowBox
+// } from 'react-native';
 
-  YellowBox.ignoreWarnings(['Setting a timer']);
+  // YellowBox.ignoreWarnings(['Setting a timer']);
 
 // const config = require('./config')
 
@@ -24,9 +24,9 @@ import {
     storageBucket: "",
     messagingSenderId: "729228013513",
     appId: "1:729228013513:web:4d24033b6e609949f74218"
-  };
+  }; //ประกาศเพื่อระบุตัวตนแอพกับฐานข้อมูล
 
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig); //ทำการเชื่อมกับฐานข้อมูล
 
   // firebase.database().ref('users/001').set(
   //   {

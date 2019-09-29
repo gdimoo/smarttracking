@@ -6,7 +6,7 @@ export const createUser = (email, password,name,telephone,address,Latitude,Longi
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(() =>{
             const uid = firebase.auth().currentUser.uid;
-            firebase.database().ref('userData/${uid}').set({
+            firebase.database().ref('userData/'+uid).set({
                 name:name,
                 telephone:telephone, 
                 address:address, 

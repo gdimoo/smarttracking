@@ -41,9 +41,9 @@ export default class Craigslist extends Component {
       modalVisible:false,
       userSelected:[],
       data: [
-        {id:1,  name: "สถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
-        {id:2,  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
-        {id:3,  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
+        {id:'1',  name: "สถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
+        {id:'2',  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
+        {id:'3',  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
         
       ]
     };
