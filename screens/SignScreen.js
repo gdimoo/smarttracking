@@ -28,13 +28,7 @@ export default class Craigslist extends Component {
     })
   }
 
-    sign(navigation) {
-        console.log('sign() called', navigation)
-
-        InteractionManager.runAfterInteractions(() => {
-            navigation.navigate('Sign')
-        })
-    }
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -49,6 +43,9 @@ export default class Craigslist extends Component {
     };
   }
 
+  clickEventListener = (item) => {
+    // Alert.alert('Message', 'Item clicked. '+item.name);
+  }
 
   render() {
     return (
