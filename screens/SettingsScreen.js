@@ -21,6 +21,7 @@ export default class settingscreen extends React.Component {
     super(props);
     this.state = {
       switchOn1: false,
+      message:"",
      
     };
   }
@@ -41,11 +42,17 @@ export default class settingscreen extends React.Component {
           <TextInput style={styles.inputs}
               placeholder="message"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({message})}/>
+              onChangeText={(text) => this.setState({message:text})}
+              value={this.state.message}/>
           <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/flat_round/40/000000/secured-letter.png'}}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.clickListener('login')}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {
+              const uid = firebase.auth().currentUser.uid;
+              firebase.database().ref('userData/' + uid).update({
+                message: this.state.message
+              }).catch((error) => console.log('error: ', error));
+        }}>
           <Text style={styles.buttonText}>อัพเดทสถานะ</Text>
         </TouchableHighlight>
     
@@ -57,10 +64,10 @@ export default class settingscreen extends React.Component {
   }
   onPress1 = () => {
     this.setState({ switchOn1: !this.state.switchOn1 });
-    
+
     const uid = firebase.auth().currentUser.uid;
-    firebase.database().ref('userData/' + uid).set({
-      status: this.state.switchOn1
+    firebase.database().ref('userData/' + uid).update({
+      status: !this.state.switchOn1
     }).catch((error) => console.log('error: ', error));
   }
 }
