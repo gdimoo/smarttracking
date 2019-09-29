@@ -8,6 +8,13 @@ import LoginScreen from './screens/LoginScreen';
 import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
+import {
+  YellowBox
+} from 'react-native';
+
+construct() {
+  YellowBox.ignoreWarnings(['Setting a timer']);
+}
 
 // const config = require('./config')
 

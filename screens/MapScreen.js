@@ -1,122 +1,121 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+
 import MapView from 'react-native-maps';
+import * as Permissions from 'expo-permissions'
 
-import { MonoText } from '../components/StyledText';
+import { Marker } from 'react-native-maps';
 
-export default class MapScreen extends React.Component {
-    static navigationOptions = {
-      header: null,
-    };
-  render() {
+const locations = require('../locations.json');
+const { width, height } = Dimensions.get('screen');
+
+export default class App extends React.Component {
+  state = {
+    latitude: null,
+    longitude: null,
+    locations: locations
+  }
+
+  async componentDidMount() {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION)
+
+    if (status !== 'granted') {
+      const response = await Permissions.askAsync(Permissions.LOCATION)
+    }
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => this.setState({ latitude, longitude }, this.mergeCoords),
+      (error) => console.log('Error:', error)
+    )
+
+    const { locations: [ sampleLocation ] } = this.state
+
+    this.setState({
+      desLatitude: sampleLocation.coords.latitude,
+      desLongitude: sampleLocation.coords.longitude
+    }, this.mergeCoords)
+  }
+
+  mergeCoords = () => {
+    const {
+      latitude,
+      longitude,
+      desLatitude,
+      desLongitude
+    } = this.state
+
+  }
+
+  onMarkerPress = location => () => {
+    const { coords: { latitude, longitude } } = location
+    this.setState({
+      destination: location,
+      desLatitude: latitude,
+      desLongitude: longitude
+    }, this.mergeCoords)
+  }
+
+  renderMarkers = () => {
+    const { locations } = this.state
     return (
-      <MapView style={{flex: 1}}/>
-    );
+      <View>
+        {
+          locations.map((location, idx) => {
+            const {
+              coords: { latitude, longitude }
+            } = location
+            return (
+              <Marker
+                key={idx}
+                coordinate={{ latitude, longitude }}
+                onPress={this.onMarkerPress(location)}
+              />
+            )
+          })
+        }
+      </View>
+    )
+  }
+
+  render() {
+    const {
+      time,
+      coords,
+      distance,
+      latitude,
+      longitude,
+      destination
+    } = this.state
+
+    if (latitude) {
+      return (
+        <MapView
+          showsUserLocation
+          style={{ flex: 1 }}
+          initialRegion={{
+            latitude,
+            longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
+        >
+      
+        {this.renderMarkers()}
+      </MapView>
+      );
+    }
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>We need your permission!</Text>
+      </View>
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFE633',
-    color: '#85483F',
-    fontSize: 40,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
-  developmentModeText: {
-    color: '#85483F',
-    fontSize: 40,
-    lineHeight: 19,
-    textAlign: 'center',
-    width: 345,
-    height: 67,
-  },
-  contentContainer: {
-    paddingTop: 30, 
-    color: '#85483F',
-    fontSize: 40,
-    textAlign: 'center',
-  },
-  welcomeContainer: {
+    backgroundColor: '#fff',
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+    justifyContent: 'center',
   },
 });

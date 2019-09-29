@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 6348,
-  "expoServerNgrokUrl": "https://rx-ib8.siripraki60.again.exp.direct",
-  "packagerNgrokUrl": "https://packager.rx-ib8.siripraki60.again.exp.direct",
-  "ngrokPid": 4100
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null
 }
