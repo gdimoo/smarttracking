@@ -12,9 +12,8 @@ import {
   Platform,
   InteractionManager,
 } from 'react-native';
+import ignoreWarnings from 'react-native-ignore-warnings';
 
-import { WebBrowser } from 'expo';
-import { MonoText } from '../components/StyledText';
 import * as FirebaseAPI from '../modules/firebaseAPI';
 export default class Craigslist extends Component {
   static navigationOptions = {
@@ -31,20 +30,37 @@ export default class Craigslist extends Component {
   }
   constructor(props) {
     super(props);
+    console.disableYellowBox = true;
+
     this.state = {
       modalVisible:false,
       userSelected:[],
       data: [
-        {id:1,  name: "สถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
-        {id:2,  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
-        {id:3,  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
+        {id:'1',  name: "ตั้งสถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
+        {id:'2',  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
+        {id:'3',  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
         
       ]
     };
   }
 
-  clickEventListener = (item) => {
-    // Alert.alert('Message', 'Item clicked. '+item.name);
+  clickEventListener = (item, navigation) => {
+    // Alert.alert('Message', 'Item clicked. ' + item.id);
+    if (item.id == '1') {
+      InteractionManager.runAfterInteractions(() => {
+        navigation.navigate('Settings')
+      })
+    }
+    if (item.id == '2') {
+      InteractionManager.runAfterInteractions(() => {
+        navigation.navigate('Links')
+      })
+    }
+    if (item.id == '3') {
+      InteractionManager.runAfterInteractions(() => {
+        navigation.navigate('Map')
+      })
+    }
   }
 
   render() {
@@ -65,21 +81,29 @@ export default class Craigslist extends Component {
           renderItem={({item}) => {
           return (
             
-            <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
+            < TouchableOpacity style = {
+              styles.card
+            }
+            onPress = {
+              () => {
+                this.clickEventListener(item, this.props.navigation)
+              }
+            } >
               <Image style={styles.image} source={{uri: item.image}}/>
               <View style={styles.cardContent}>
               
                 <Text style={styles.name}>{item.name}</Text>
             
-                <TouchableOpacity style={styles.followButton} onPress={()=> this.clickEventListener(item)}>
+                < TouchableOpacity style = {
+                  styles.followButton
+                }
+                onPress = {
+                  () => this.clickEventListener(item, this.props.navigation)
+                } >
                   <Text style={styles.followButtonText}>click</Text>  
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
-            
-            
-
-            
           )}}/>
           <View style={styles.center1}>
 
