@@ -7,6 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 import MapScreen from '../screens/MapScreen';
 import LinksScreen from '../screens/SearchingScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import AcceptingScreen from '../screens/AcceptingScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -84,12 +85,35 @@ MapStack.navigationOptions = {
 
 MapStack.path = '';
 
+const AcceptStack = createStackNavigator(
+  {
+    Accept: AcceptingScreen,
+  },
+  config
+);
+
+AcceptStack.navigationOptions = {
+  tabBarLabel: 'Accepting',
+  tabBarIcon: ({ focused }) => (
+    < TabBarIcon focused = {
+      focused
+    }
+    name = {
+      Platform.OS === 'ios' ? 'ios-checkmark' : 'md-checkmark'
+    }
+    />
+  ),
+};
+
+AcceptStack.path = '';
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
   MapStack,
+  AcceptStack,
 });
 
 tabNavigator.path = '';
