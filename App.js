@@ -8,13 +8,6 @@ import LoginScreen from './screens/LoginScreen';
 import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
-// import {
-//   YellowBox
-// } from 'react-native';
-
-  // YellowBox.ignoreWarnings(['Setting a timer']);
-
-// const config = require('./config')
 
   var firebaseConfig = {
     apiKey: "AIzaSyBP7uJQlit-vtNBUBsc_9oTBhn2HHjr6Dc",

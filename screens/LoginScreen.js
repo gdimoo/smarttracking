@@ -36,7 +36,7 @@ static navigationOptions = {
     
   watchAuthState(navigation) {
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log('onAuthStatheChanged: ', user)
+        // console.log('onAuthStatheChanged: ', user)
         if(user){
           navigation.navigate('Home');
           }

@@ -39,7 +39,7 @@ export default class LoginScreen extends React.Component {
     
   watchAuthState(navigation) {
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log('onAuthStatheChanged: ', user)
+        // console.log('onAuthStatheChanged: ', user)
         if(user){
           navigation.navigate('Home');
           }
@@ -75,8 +75,8 @@ export default class LoginScreen extends React.Component {
               placeholder="Telephone"
               keyboardType="phone-pad"
               underlineColorAndroid='transparent'
-              onChangeText={(text) => this.setState({Telephone: text})}
-              value={this.state.Telephone}
+              onChangeText={(text) => this.setState({telephone: text})}
+              value={this.state.telephone}
               />
       </View>
       <View style={styles.inputContainer}> 

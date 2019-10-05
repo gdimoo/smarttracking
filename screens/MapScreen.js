@@ -6,8 +6,10 @@ import * as Permissions from 'expo-permissions'
 
 import { Marker } from 'react-native-maps';
 
-const locations = require('../locations.json');
 const { width, height } = Dimensions.get('screen');
+const locations = require('../locations.json');
+const LATITUDE_DELTA = 0.01;
+const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
 
 export default class App extends React.Component {
   state = {
@@ -35,15 +37,6 @@ export default class App extends React.Component {
     }, this.mergeCoords)
   }
 
-  mergeCoords = () => {
-    const {
-      latitude,
-      longitude,
-      desLatitude,
-      desLongitude
-    } = this.state
-
-  }
 
   onMarkerPress = location => () => {
     const { coords: { latitude, longitude } } = location
@@ -68,6 +61,7 @@ export default class App extends React.Component {
                 key={idx}
                 coordinate={{ latitude, longitude }}
                 onPress={this.onMarkerPress(location)}
+                pinColor={'#46FF33'}
               />
             )
           })
@@ -78,12 +72,8 @@ export default class App extends React.Component {
 
   render() {
     const {
-      time,
-      coords,
-      distance,
       latitude,
       longitude,
-      destination
     } = this.state
 
     if (latitude) {
@@ -94,8 +84,8 @@ export default class App extends React.Component {
           initialRegion={{
             latitude,
             longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA
           }}
         >
       
