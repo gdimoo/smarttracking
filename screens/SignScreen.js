@@ -14,7 +14,7 @@ export default class SignatureScreen extends React.Component {
       signature: this.state.signature,
     }).catch((error) => console.log('AddSigntoDB error: ', error))
     });
-    
+    this.props.navigation.navigate('Home');
     
   }
  
