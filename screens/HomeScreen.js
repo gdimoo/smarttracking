@@ -39,6 +39,7 @@ export default class Craigslist extends Component {
         {id:'1',  name: "ตั้งสถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
         {id:'2',  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
         {id:'3',  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
+        {id:'4',  name: "ยืนยันการรับพัสดุ",       image:"https://img.icons8.com/bubbles/50/000000/verified-account.png" } ,
         
       ]
     };
@@ -59,6 +60,11 @@ export default class Craigslist extends Component {
     if (item.id == '3') {
       InteractionManager.runAfterInteractions(() => {
         navigation.navigate('Map')
+      })
+    }
+    if (item.id == '4') {
+      InteractionManager.runAfterInteractions(() => {
+        navigation.navigate('Accept')
       })
     }
   }

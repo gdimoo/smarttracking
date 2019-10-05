@@ -3,14 +3,20 @@ import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
 
 import MapView from 'react-native-maps';
 import * as Permissions from 'expo-permissions'
+import * as firebase from 'firebase'
 
-import { Marker } from 'react-native-maps';
+import {
+  Marker,
+  Callout,
+  CalloutSubview,
+  ProviderPropType,
+} from 'react-native-maps';
 
 const { width, height } = Dimensions.get('screen');
 const locations = require('../locations.json');
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
-
+// let userlocation = firebase.database().ref('')
 export default class App extends React.Component {
   state = {
     latitude: null,
@@ -54,15 +60,38 @@ export default class App extends React.Component {
         {
           locations.map((location, idx) => {
             const {
-              coords: { latitude, longitude }
+              coords: { latitude, longitude },
+              status: Userstatus,
+              name:name,
+              address:address
             } = location
+            const color="";
+            if (Userstatus==false) {
+              this.color = "#DA0000";
+            }
+            else{
+              this.color = '#2ECC71';
+            }
+            // console.log(Userstatus);
             return (
               <Marker
                 key={idx}
                 coordinate={{ latitude, longitude }}
                 onPress={this.onMarkerPress(location)}
-                pinColor={'#46FF33'}
-              />
+                pinColor={this.color}
+                        onPress={() => {}}
+        onCalloutPress={() => {
+          this.marker.hideCallout();
+        }}>
+        <Callout style={styles.plainView}
+          tooltip={true}>
+              <View  style={{ backgroundColor: "white" }}>
+                <Text style={styles.plainView}>
+                  {address}
+                </Text>
+              </View>
+        </Callout>
+      </Marker>
             )
           })
         }
@@ -103,9 +132,14 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    ...StyleSheet.absoluteFillObject,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+    plainView: {
+      width: 100,
+    },
+
 });

@@ -8,6 +8,7 @@ import MapScreen from '../screens/MapScreen';
 import LinksScreen from '../screens/SearchingScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import AcceptingScreen from '../screens/AcceptingScreen';
+import SignScreen from '../screens/SignScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -107,6 +108,12 @@ AcceptStack.navigationOptions = {
 
 AcceptStack.path = '';
 
+const SignStack = createStackNavigator({
+    Sign: SignScreen,
+  },
+  config
+);
+SignStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,

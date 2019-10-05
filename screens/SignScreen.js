@@ -1,199 +1,92 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
-  Dimensions,
-  Alert,
-  ScrollView,
-  Platform,
-  InteractionManager,
-} from 'react-native';
-
-import * as FirebaseAPI from '../modules/firebaseAPI';
-export default class Craigslist extends Component {
-  static navigationOptions = {
-    header: null,
-  };
-
-  logout(navigation) {
-    console.log('logout() called', navigation)
-    FirebaseAPI.logoutUser()
-
-    InteractionManager.runAfterInteractions(() => {
-      navigation.navigate('Auth')
-    })
-  }
-
-  
+import React from 'react';
+import { StyleSheet, Text, View, Image,InteractionManager } from 'react-native';
+import Signature from 'react-native-signature-canvas';
+import * as firebase from 'firebase' 
+export default class SignatureScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modalVisible:false,
-      userSelected:[],
-      data: [
-        {id:1,  name: "สถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
-        {id:2,  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
-        {id:3,  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
-        
-      ]
-    };
+    this.state = { signature: null };
+  }
+  AddSigntoDB(signature){
+    InteractionManager.runAfterInteractions(() => {
+      const uid = firebase.auth().currentUser.uid;
+    firebase.database().ref('ComfirmData/' + uid).update({
+      signature: this.state.signature,
+    }).catch((error) => console.log('AddSigntoDB error: ', error))
+    });
+    
+    
+  }
+ 
+  handleSignature = signature => {
+    this.setState({ signature });
+    this.AddSigntoDB(this.state.signature);
+
+  };
+ 
+  handleEmpty = () => {
+    console.log('Empty');
   }
 
-  clickEventListener = (item) => {
-    // Alert.alert('Message', 'Item clicked. '+item.name);
-  }
-
+ 
   render() {
+    const style = `.m-signature-pad--footer
+    .button {
+      background-color: #009688;
+      color: #583535;
+    }`;
+    
+   
     return (
-      
-      <View style={styles.container}>
-        <Text style={styles.center2}>Home </Text>
+      <View style={{ flex: 1 }}>
+               <View style={styles.preview}>
+          {this.state.signature ? (
+            <Image
+              resizeMode={"contain"}
+              style={{ width: 335, height: 114 }}
+              source={{ uri: this.state.signature }}
+            />
+          ) : null}
+      </View>
+        <Signature
+          onOK={this.handleSignature}
+          descriptionText="ยินยันการรับพัสดุ"
+          clearText="Clear"
+          confirmText="Save"
+          webStyle={style}
+        />
 
-        <FlatList 
-          style={styles.contentList}
-          
-          columnWrapperStyle={styles.listContainer}
-          data={this.state.data}
-          keyExtractor= {(item) => {
-           
-            return item.id;
-          }}
-          renderItem={({item}) => {
-          return (
-            
-            <TouchableOpacity style={styles.card} onPress={() => {this.clickEventListener(item)}}>
-              <Image style={styles.image} source={{uri: item.image}}/>
-              <View style={styles.cardContent}>
-              
-                <Text style={styles.name}>{item.name}</Text>
-            
-                <TouchableOpacity style={styles.followButton} onPress={()=> this.clickEventListener(item)}>
-                  <Text style={styles.followButtonText}>click</Text>  
-                </TouchableOpacity>
-              </View>
-            </TouchableOpacity>
-            
-            
-
-            
-          )}}/>
-          <View style={styles.center1}>
-
-          <TouchableOpacity
-            style={[styles.buttonContainer, styles.signupButton]}
-            onPress={() => {this.logout(this.props.navigation)}}
-          >
-            <View>
-            <Text style={styles.followButtonText}>Logout</Text>
-
-            </View>
-          </TouchableOpacity>
-          </View>
+       
       </View>
     );
   }
 }
-
+ 
 const styles = StyleSheet.create({
+  preview: {
+    width: 335,
+    height: 114,
+    backgroundColor: "#F8F8F8",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15
+  },
+  previewText: {
+    color: "#FFF",
+    fontSize: 14,
+    height: 40,
+    lineHeight: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: "#69B2FF",
+    width: 120,
+    textAlign: "center",
+    marginTop: 10
+  },
   container:{
     flex:1,
     marginTop:20,
     backgroundColor:"#FDCD00"
     
   },
-  contentList:{
-    flex:1,
-  },
-  cardContent: {
-    marginLeft:20,
-    marginTop:10,
-    alignItems: 'center',
-  },
-  image:{
-    width:90,
-    height:90,
-    borderRadius:45,
-    borderWidth:2,
-    borderColor:"#ebf0f7"
-  },
-
-  card:{
-    shadowColor: '#00000021',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
-    elevation: 12,
-
-    marginLeft: 20,
-    marginRight: 20,
-    marginTop:20,
-    backgroundColor:"white",
-    padding: 10,
-    flexDirection:'row',
-    borderRadius:30,
-  },
-
-  name:{
-    fontSize:18,
-    flex:1,
-    alignSelf:'center',
-    color:"#3399ff",
-    fontWeight:'bold'
-  },
-  count:{
-    fontSize:14,
-    flex:1,
-    alignSelf:'center',
-    color:"#6666ff"
-  },
-  followButton: {
-    marginTop:10,
-    height:35,
-    width:100,
-    padding:10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius:30,
-    backgroundColor: "white",
-    borderWidth:1,
-    borderColor:"#dcdcdc",
-  },
-  followButtonText:{
-    color: "#dcdcdc",
-    fontSize:12,
-  },
-  buttonContainer: {
-    height:45,
-    
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-  },
-  signupButton: {
-    backgroundColor: "#009688",
-  },
-  center1:{
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  center2:{
-  
-    fontSize:50,
-    color:"#583535",
-    textAlign: 'center',
- 
-  }
-  
-  
-
-});  
+});
