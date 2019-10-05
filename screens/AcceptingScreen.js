@@ -20,12 +20,27 @@ export default class settingscreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      switchOn1: false,
-      message:"",
-     
+      name: "",
+      tracknumber:"EM123456TH",
+      date:"07/10/2562",
     };
   }
-    clickEventListener = (navigation) => {
+  findname(uid){
+    firebase.database().ref('userData/' + uid).on('value',
+            (snapshot) =>{
+             return (snapshot.val().name).toString();
+             });
+  }
+
+    clickEventListener = (navigation,nameuser) => {
+          InteractionManager.runAfterInteractions(() => {
+            const uid = firebase.auth().currentUser.uid;
+            firebase.database().ref('ComfirmData/' + uid).set({
+              // name: this.findname(uid),
+              tracknumber: this.state.tracknumber,
+              date: this.state.date,
+            }).catch((error) => console.log('AddSigntoDB error: ', error))
+          });
       InteractionManager.runAfterInteractions(() => {
         navigation.navigate('Sign')
       })
@@ -37,14 +52,14 @@ export default class settingscreen extends React.Component {
         <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
     
         <Text style={styles.title}>ชื่อผู้รับพัสดุ: {'\n'}</Text>
-        <Text style={styles.title}>หมายเลขพัสดุ : {'\n'}</Text>
-        <Text style={styles.title}>วันที่/เวลา : {'\n'}</Text>
+        <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
+        <Text style={styles.title}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
         
       
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} 
         onPress = {
               () => {
-                this.clickEventListener(this.props.navigation)
+                this.clickEventListener(this.props.navigation,this.state.name)
               }
             }>
           <Text style={styles.buttonText}>ยืนยัน</Text>
@@ -54,6 +69,7 @@ export default class settingscreen extends React.Component {
   }
 
 }
+
 
 
 const styles = StyleSheet.create({

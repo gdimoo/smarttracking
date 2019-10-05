@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image,InteractionManager } from 'react-native';
+import { StyleSheet, Alert, View, Image,InteractionManager } from 'react-native';
 import Signature from 'react-native-signature-canvas';
 import * as firebase from 'firebase' 
 export default class SignatureScreen extends React.Component {
@@ -13,13 +13,24 @@ export default class SignatureScreen extends React.Component {
     firebase.database().ref('ComfirmData/' + uid).update({
       signature: this.state.signature,
     }).catch((error) => console.log('AddSigntoDB error: ', error))
-    });
-    this.props.navigation.navigate('Home');
-    
+    });    
+    // Alert.alert(
+    // 'ยืนยันรับพัสดุ' [{
+    //     text: 'OK',
+    //     onPress: () => 
+        this.props.navigation.navigate('Home')
+    //   },
+    //   {
+    //     text: 'Cancel',
+    //     style: 'cancel',
+    //   }
+    // ], {cancelable: false},
+    // );
   }
  
   handleSignature = signature => {
     this.setState({ signature });
+
     this.AddSigntoDB(this.state.signature);
 
   };
