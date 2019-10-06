@@ -16,7 +16,7 @@ const { width, height } = Dimensions.get('screen');
 const locations = require('../locations.json');
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
-// let userlocation = firebase.database().ref('')
+// const userlocation = firebase.database().ref('userData')
 export default class App extends React.Component {
   state = {
     latitude: null,

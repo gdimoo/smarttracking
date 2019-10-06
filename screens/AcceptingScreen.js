@@ -25,22 +25,33 @@ export default class settingscreen extends React.Component {
       date:"07/10/2562",
     };
   }
-  //  findname = (uid) =>{
-    
-  //   firebase.database().ref('userData/' + uid).once('value')
-  //   .then(function(snapshot){
-  //     if(!snapshot){
-  //       console.log('error occured')
-  //     }
-  //     else{
-  //         let user={
-  //           name: snapshot.val().name
-  //         }
-  //         // console.log(user.name)
-  //         return user.name
-  //   }
+   findname = (uid) =>{
+    // console.log(uid)
+    // firebase.database().ref('userData/' + uid).child('/').once('value')
+    // .then(function(snapshot){
+    //   // if (snapshot.exists) {
+    //   if(snapshot.exists){
+    //     // console.log('error occured')
+    //     let user={
+    //       name: snapshot.child('name').value()
+    //     }
+    //     console.log(user)
+    //       return user.name
+  firebase.database().ref('userData').orderByChild('name').equalTo('widwa').on('value', snapshot => {
+    console.log(snapshot.val()) 
+    snapshot.forEach(childSnapshot => {
+      let key = childSnapshot.key
+      var childData = childSnapshot.val() 
+      console.log(childData.name)
+    })
+  });
+    //   }
+
+          
+
   // });
-  // }
+  }
+
   // componentWillMount(){
   //   this.setState({
   //     nameuser: this.findname(firebase.auth().currentUser.uid)
@@ -66,6 +77,12 @@ export default class settingscreen extends React.Component {
     return (
       
       <View style={styles.container}>
+        {
+          this.findname(firebase.auth().currentUser.uid)}
+        { console.log(2)}
+         { this.findname(firebase.auth().currentUser.uid)
+        }
+
         <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
         <Text style={styles.title}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
         <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
