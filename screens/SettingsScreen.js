@@ -31,7 +31,7 @@ export default class settingscreen extends React.Component {
 <KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
    < ScrollView style = {{flex: 1,backgroundColor: '#FDCD00'}} >
       <View style={styles.container}>
-        <Image style={styles.icon} source={{uri: "https://image.flaticon.com/icons/png/512/856/856903.png"}} />
+        <Image style={styles.icon} source={{uri: "https://img.icons8.com/clouds/50/000000/new-letter.png"}} />
         <Text style={styles.title}>สถานะ : ไม่อยู่บ้าน/อยู่บ้าน{'\n'}</Text>
         <SwitchToggle
        switchOn={this.state.switchOn1}
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize:24,
     textAlign: 'center',
     marginTop:22,
-    color: "#5F6D7A"
+    color: "#000000"
   },
   description: {
     marginTop:20,
