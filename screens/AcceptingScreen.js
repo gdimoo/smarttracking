@@ -1,4 +1,3 @@
-import SwitchToggle from 'react-native-switch-toggle';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -9,55 +8,28 @@ import {
   Image,
   Text,
   TouchableHighlight,
-  InteractionManager,
+  InteractionManager
 } from 'react-native';
 import * as firebase from 'firebase'
+
+import { getByQuery } from '../utils'
 
 export default class settingscreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-  constructor(props) {
-    super(props);
-    this.state = {
-      name:"Test",
+
+    state = {
+      name: "Wait...",
       tracknumber:"EM123456TH",
-      date:"07/10/2562",
-    };
-  }
-   findname = (uid) =>{
-    // console.log(uid)
-    // firebase.database().ref('userData/' + uid).child('/').once('value')
-    // .then(function(snapshot){
-    //   // if (snapshot.exists) {
-    //   if(snapshot.exists){
-    //     // console.log('error occured')
-    //     let user={
-    //       name: snapshot.child('name').value()
-    //     }
-    //     console.log(user)
-    //       return user.name
-  firebase.database().ref('userData').orderByChild('name').equalTo('widwa').on('value', snapshot => {
-    console.log(snapshot.val()) 
-    snapshot.forEach(childSnapshot => {
-      let key = childSnapshot.key
-      var childData = childSnapshot.val() 
-      console.log(childData.name)
-    })
-  });
-    //   }
+      date:"07/10/2562"
+}
 
-          
-
-  // });
-  }
-
-  // componentWillMount(){
-  //   this.setState({
-  //     nameuser: this.findname(firebase.auth().currentUser.uid)
-  //   })
-  // }
-
+componentDidMount() {
+  firebase.auth().onAuthStateChanged(userReady => {
+    return userReady && getByQuery('userData', userReady.uid).then(success => this.setState({name: success.val().name}))
+  })
+}
     clickEventListener = (navigation) => {
           InteractionManager.runAfterInteractions(() => {
             const uid = firebase.auth().currentUser.uid;  
@@ -75,20 +47,11 @@ export default class settingscreen extends React.Component {
 
   render() {
     return (
-      
       <View style={styles.container}>
-        {
-          this.findname(firebase.auth().currentUser.uid)}
-        { console.log(2)}
-         { this.findname(firebase.auth().currentUser.uid)
-        }
-
-        <Image style={styles.icon} source={{uri: "https://cdn2.iconfinder.com/data/icons/logistics-delivery-2-4/64/82-512.png"}} />
+        <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
         <Text style={styles.title}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
         <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
         <Text style={styles.title}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
-        
-      
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} 
         onPress = {
               () => {
@@ -100,7 +63,6 @@ export default class settingscreen extends React.Component {
       </View>
     )
   }
-
 }
 
 
