@@ -5,10 +5,10 @@ import {
   Text,
   View,
   TextInput,
-  KeyboardAvoidingView,
+  Button,
   TouchableHighlight,
   Image,
-  ScrollView,
+  Alert,
   Dimensions,
   InteractionManager,
 } from 'react-native';
@@ -57,17 +57,17 @@ static navigationOptions = {
 
   render() {
     return (
+      
       <View style={styles.container}>
         <Text style={styles.name}>Smart Tracking</Text>
         <View style={styles.getStartedContainer}>
 
-          <Image source={require('../assets/images/mail.png')} style={styles.logo} 
+          <Image source={{uri: 'https://cdn1.iconfinder.com/data/icons/fulfillment-and-shipping-delivery-service-2/64/GPS-tracking-parcel-delivery-512.png'}} style={styles.logo} 
     />
       </View>
        
-      <KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/dusk/64/000000/email.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Email"
               keyboardType="email-address"
@@ -76,18 +76,18 @@ static navigationOptions = {
               value={this.state.email}
               />
         </View>
-      
+        
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/dusk/100/000000/password1.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}
              value={this.state.password}
+              
               />
         </View>
-      </KeyboardAvoidingView>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signIn()}>
           <Text style={styles.signUpText}>Sign in</Text>
@@ -96,6 +96,7 @@ static navigationOptions = {
           <Text style={styles.signUpText}>sign up</Text>
         </TouchableHighlight>
       </View>
+      
     );
   }
 }
