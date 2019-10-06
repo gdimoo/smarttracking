@@ -36,10 +36,10 @@ export default class Craigslist extends Component {
       modalVisible:false,
       userSelected:[],
       data: [
-        {id:'1',  name: "ตั้งสถานะเจ้าของบ้าน",   image:"https://img.icons8.com/bubbles/50/000000/small-business.png"           },
-        {id:'2',  name: "เช็คสถานะพัสดุ",    image:"https://img.icons8.com/bubbles/50/000000/search-property.png"      },
-        {id:'3',  name: "แผนที่",       image:"https://img.icons8.com/clouds/100/000000/map-pin.png" } ,
-        {id:'4',  name: "ยืนยันการรับพัสดุ",       image:"https://img.icons8.com/bubbles/50/000000/verified-account.png" } ,
+        {id:'1',  name: "ตั้งสถานะเจ้าของบ้าน",   image:"http://icons.iconarchive.com/icons/streamlineicons/streamline-ux-free/1024/real-estate-house-icon.png"           },
+        {id:'2',  name: "เช็คสถานะพัสดุ",    image:"https://cdn3.iconfinder.com/data/icons/stock-market-color/64/analyze-research-investigate-analyse-examine-zoom-512.png"      },
+        {id:'3',  name: "แผนที่",       image:"http://theoystertavern.ie/wp-content/uploads/2016/05/map-icon.png" } ,
+        {id:'4',  name: "ยืนยันการรับพัสดุ",       image:"https://icons-for-free.com/iconfiles/png/512/approve+browser+confirm+confirmation+seo+valid+icon-1320191077122728418.png" } ,
         
       ]
     };
@@ -73,8 +73,11 @@ export default class Craigslist extends Component {
     return (
       
       <View style={styles.container}>
+        <View style={styles.inputContainer}>
+        <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/plasticine/100/000000/home.png'}}/>
         <Text style={styles.center2}>Home </Text>
-
+        </View>
+        
         <FlatList 
           style={styles.contentList}
           
@@ -84,18 +87,22 @@ export default class Craigslist extends Component {
            
             return item.id;
           }}
+          
           renderItem={({item}) => {
           return (
             
             < TouchableOpacity style = {
               styles.card
+              
             }
             onPress = {
               () => {
                 this.clickEventListener(item, this.props.navigation)
+                
               }
             } >
               <Image style={styles.image} source={{uri: item.image}}/>
+              
               <View style={styles.cardContent}>
               
                 <Text style={styles.name}>{item.name}</Text>
@@ -110,6 +117,8 @@ export default class Craigslist extends Component {
                 </TouchableOpacity>
               </View>
             </TouchableOpacity>
+          
+            
           )}}/>
           <View style={styles.center1}>
 
@@ -118,12 +127,13 @@ export default class Craigslist extends Component {
             onPress={() => {this.logout(this.props.navigation)}}
           >
             <View>
-            <Text style={styles.followButtonText}>Logout</Text>
+            <Text style={styles.center3}>Logout</Text>
 
             </View>
           </TouchableOpacity>
           </View>
       </View>
+      
     );
   }
 }
@@ -132,7 +142,8 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     marginTop:20,
-    backgroundColor:"#FDCD00"
+    backgroundColor:"#FDCD00",
+    
     
   },
   contentList:{
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
     fontSize:18,
     flex:1,
     alignSelf:'center',
-    color:"#3399ff",
+    color:"#583535",
     fontWeight:'bold'
   },
   count:{
@@ -197,15 +208,14 @@ const styles = StyleSheet.create({
     borderColor:"#dcdcdc",
   },
   followButtonText:{
-    color: "#dcdcdc",
-    fontSize:12,
+    color: "#137DBE",
+    fontSize:15,
   },
   buttonContainer: {
     height:45,
-    
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom:20,
+    marginBottom:0,
     width:250,
     borderRadius:30,
   },
@@ -222,7 +232,28 @@ const styles = StyleSheet.create({
     color:"#583535",
     textAlign: 'center',
  
-  }
+  },
+  center3:{
+  
+    fontSize:14,
+    color:"#583535",
+    textAlign: 'center',
+ 
+  },
+  inputIcon:{
+    width:75,
+    height:75,
+    marginLeft:20,
+    flexDirection: 'row'
+  },
+  inputContainer: {
+    width:250,
+    height:60,
+    marginBottom:20,
+    flexDirection: 'row',
+
+    alignSelf:'center',
+},
   
   
 
