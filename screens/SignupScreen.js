@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from 'react-native';
 import firebase from 'firebase'
 import * as FirebaseAPI from '../modules/firebaseAPI';
@@ -58,8 +59,11 @@ export default class LoginScreen extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
       
+        <KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
+          
       <View style={styles.inputContainer}> 
           <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/ios/50/000000/name.png'}}/>
           <TextInput style={styles.inputs}
@@ -131,8 +135,8 @@ export default class LoginScreen extends React.Component {
               
               />
         </View>
+         </KeyboardAvoidingView>
 
-         
 
           <TouchableOpacity
             style={[styles.buttonContainer, styles.signupButton]}
@@ -155,6 +159,7 @@ export default class LoginScreen extends React.Component {
             </View>
           </TouchableOpacity>
         </View>
+
     );
   }
 }

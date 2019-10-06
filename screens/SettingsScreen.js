@@ -1,10 +1,9 @@
 import SwitchToggle from 'react-native-switch-toggle';
 import React, { Component } from 'react';
 import {
-  Platform,
+  KeyboardAvoidingView,
   StyleSheet,
-  ListView,
-  TouchableOpacity,
+  ScrollView,
   View,
   Image,
   Text,
@@ -28,6 +27,9 @@ export default class settingscreen extends React.Component {
 
   render() {
     return (
+      
+<KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
+   < ScrollView style = {{flex: 1,backgroundColor: '#FDCD00'}} >
       <View style={styles.container}>
         <Image style={styles.icon} source={{uri: "https://image.flaticon.com/icons/png/512/856/856903.png"}} />
         <Text style={styles.title}>สถานะ : ไม่อยู่บ้าน/อยู่บ้าน{'\n'}</Text>
@@ -36,8 +38,6 @@ export default class settingscreen extends React.Component {
        onPress={this.onPress1}
        /> 
         <Text style={styles.title}>ข้อความ : กรณีไม่อยู่บ้าน{'\n'}</Text>
-        
-        {/* <Text style={styles.description}>ฝากข้อความ</Text> */}
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="message"
@@ -46,7 +46,8 @@ export default class settingscreen extends React.Component {
               value={this.state.message}/>
           <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/flat_round/40/000000/secured-letter.png'}}/>
         </View>
-
+      
+        
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {
               const uid = firebase.auth().currentUser.uid;
               firebase.database().ref('userData/' + uid).update({
@@ -57,9 +58,8 @@ export default class settingscreen extends React.Component {
         </TouchableHighlight>
     
       </View>
-
-     
-
+      </ScrollView>
+        </KeyboardAvoidingView>
     )
   }
   onPress1 = () => {
@@ -135,6 +135,10 @@ inputIcon:{
   marginLeft:15,
   justifyContent: 'center'
 },
+keyboardAvoidContainer: {
+  flex: 1,
+  backgroundColor: 'orange'
+}
 
 });
  

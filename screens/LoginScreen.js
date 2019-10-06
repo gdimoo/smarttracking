@@ -5,10 +5,10 @@ import {
   Text,
   View,
   TextInput,
-  Button,
+  KeyboardAvoidingView,
   TouchableHighlight,
   Image,
-  Alert,
+  ScrollView,
   Dimensions,
   InteractionManager,
 } from 'react-native';
@@ -57,7 +57,6 @@ static navigationOptions = {
 
   render() {
     return (
-      
       <View style={styles.container}>
         <Text style={styles.name}>Smart Tracking</Text>
         <View style={styles.getStartedContainer}>
@@ -66,6 +65,7 @@ static navigationOptions = {
     />
       </View>
        
+      <KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
@@ -76,7 +76,7 @@ static navigationOptions = {
               value={this.state.email}
               />
         </View>
-        
+      
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
@@ -85,9 +85,9 @@ static navigationOptions = {
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({password: text})}
              value={this.state.password}
-              
               />
         </View>
+      </KeyboardAvoidingView>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signIn()}>
           <Text style={styles.signUpText}>Sign in</Text>
@@ -96,7 +96,6 @@ static navigationOptions = {
           <Text style={styles.signUpText}>sign up</Text>
         </TouchableHighlight>
       </View>
-      
     );
   }
 }
