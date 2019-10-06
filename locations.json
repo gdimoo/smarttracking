@@ -1,4 +1,6 @@
-[{
+[
+    {
+    "message": "",
         "name": "ห้างหุ้นส่วนจำกัด ปึงยู่เฮง",
         "address": "135 Nam Kỳ Khởi Nghĩa, Phường Bến Thành, Quận 1, Hồ Chí Minh 700000",
         "coords": {
@@ -9,6 +11,7 @@
         "status":false
     },
     {
+    "message": "",
         "name": "Turtle Lake",
         "address": "Turtle Lake, phường 6, District 3, Ho Chi Minh City",
         "coords": {
@@ -19,6 +22,7 @@
         "status": false
     },
     {
+    "message": "",
         "name": "mor ubon",
         "address": "208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh, Hồ Chí Minh 700000",
         "coords": {
@@ -29,6 +33,7 @@
         "status": true
     },
     {
+    "message": "",
         "name": "ช่างสำราญ",
         "address": "Bùi ViệnPhạm Ngũ Lão, Quận 1, Hồ Chí Minh",
         "coords": {
@@ -39,6 +44,8 @@
         , "status": true
     },
     {
+    "message": "",
+        
         "name": "Ben Thanh Market",
         "address": "Chợ, Lê Lợi, Phường Bến Thành, Quận 1, Hồ Chí Minh 700000",
         "coords": {
@@ -46,5 +53,66 @@
             "longitude": 106.699417
         },
         "image_url": "http://static.asiawebdirect.com/m/bangkok/portals/vietnam/homepage/ho-chi-minh-city/ben-thanh-market/allParagraphs/BucketComponent/ListingContainer/03/image/ben-thanh-market-ext.jpg"
-    }
+    },
+    {
+        "coords": {
+
+    "latitude": 15.124198,
+    "longitude": 104.907291,
+    },
+    "address": "เกษตร",
+    "message": "",
+    "name": "เกษตร",
+    "telephone": "088888888",
+    },
+    {
+        "coords": {
+
+    "latitude": 15.120298,
+    "longitude": 104.904571,
+    },
+    "address": "Engineering",
+    "name": "Widwa",
+    "message": "พร้อมเสมอฮะ",
+    "status": true,
+    "telephone": "8889999",
+    },
+
+    {
+        "coords": {
+
+    "latitude": 15.122563,
+    "longitude": 104.906163,
+    },
+    "address": "science",
+    "message": "Gggggggg",
+    "name": "nuttawat",
+    "status": false,
+    "telephone": "000",
+    },
+    {
+        "coords": {
+
+    "latitude": 15.122947,
+    "longitude": 104.905473,
+    },
+    "address": "ศีไคซิตี้",
+    "message": "มาส่งวันเสาร์นะคะ",
+    "name": "kitty",
+    "status": false,
+    "telephone": "0000000",
+    },
+    {
+        "coords": {
+
+    "latitude": 15.124851,
+    "longitude": 104.909781,
+    },
+    "message": "เอาไว้สำนักงานครับ",
+    "status": false,
+
+    "address": "หนองอีเจม",
+    "name": "Paul",
+    "telephone": "00000000000",
+    },
 ]

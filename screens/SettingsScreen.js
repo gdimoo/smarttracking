@@ -1,3 +1,4 @@
+  
 import SwitchToggle from 'react-native-switch-toggle';
 import React, { Component } from 'react';
 import {
@@ -31,7 +32,7 @@ export default class settingscreen extends React.Component {
 <KeyboardAvoidingView style={styles.keyboardAvoidContainer} behavior="padding">
    < ScrollView style = {{flex: 1,backgroundColor: '#FDCD00'}} >
       <View style={styles.container}>
-        <Image style={styles.icon} source={{uri: "https://img.icons8.com/clouds/50/000000/new-letter.png"}} />
+        <Image style={styles.icon} source={{uri: "https://cdn3.iconfinder.com/data/icons/family-retro/60/50_-Family-_family_home_people-512.png"}} />
         <Text style={styles.title}>สถานะ : ไม่อยู่บ้าน/อยู่บ้าน{'\n'}</Text>
         <SwitchToggle
        switchOn={this.state.switchOn1}
@@ -44,7 +45,7 @@ export default class settingscreen extends React.Component {
               underlineColorAndroid='transparent'
               onChangeText={(text) => this.setState({message:text})}
               value={this.state.message}/>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/flat_round/40/000000/secured-letter.png'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/clouds/50/000000/new-letter.png'}}/>
         </View>
       
         

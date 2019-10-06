@@ -13,30 +13,18 @@ import {
 } from 'react-native-maps';
 
 const { width, height } = Dimensions.get('screen');
-const locations = require('../locations.json');
 const LATITUDE_DELTA = 0.01;
+const locations = require('../locations.json');
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
-// const roofRef = firebase.database().ref();
-// const mapRef = roofRef.child('userData');
-// const userlocation = firebase.database().ref('userData')
 export default class App extends React.Component {
   state = {
     latitude: null,
     longitude: null,
     locations: locations,
-    maplist:[],
   }
 
   async componentDidMount() {
-    // mapRef.on('value',(childSnapshot)=>{
-    //   const maplist =[];
-    //   childSnapshot.forEach((oc)=>{
-    //     maplist.push({
-    //       key:doc.key,
 
-    //     })
-    //   })
-    // })
     const { status } = await Permissions.getAsync(Permissions.LOCATION)
 
     if (status !== 'granted') {
@@ -75,7 +63,8 @@ export default class App extends React.Component {
               coords: { latitude, longitude },
               status: Userstatus,
               name:name,
-              address:address
+              address:address,
+              message:message
             } = location
             const color="";
             if (Userstatus==false) {
@@ -84,7 +73,6 @@ export default class App extends React.Component {
             else{
               this.color = '#2ECC71';
             }
-            // console.log(Userstatus);
             return (
               <Marker
                 key={idx}
@@ -99,7 +87,7 @@ export default class App extends React.Component {
           tooltip={true}>
               <View  style={{ backgroundColor: "white" }}>
                 <Text style={styles.plainView}>
-                  {address}
+                  {name+' '}{address+'\n'+message}
                 </Text>
               </View>
         </Callout>

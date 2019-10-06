@@ -48,10 +48,23 @@ componentDidMount() {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
-        <Text style={styles.title}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
-        <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
-        <Text style={styles.title}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
+        <Image style={styles.icon} source={{uri: "https://cdn2.iconfinder.com/data/icons/logistics-delivery-2-4/64/82-512.png"}} />
+        <Text ></Text>
+        <View style={styles.inputContainer1}>
+        <Image style={styles.inputIcon1} source={{uri: 'https://img.icons8.com/clouds/100/000000/employee-card.png'}}/>
+        <Text style={styles.buttonText1}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
+        </View>
+        <Text ></Text>
+        <View style={styles.inputContainer1}>
+        <Image style={styles.inputIcon1} source={{uri: 'https://img.icons8.com/clouds/100/000000/keyboard.png'}}/>
+        <Text style={styles.buttonText1}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
+        </View>
+        <Text ></Text>
+        <View style={styles.inputContainer1}>
+        <Image style={styles.inputIcon1} source={{uri: 'https://img.icons8.com/clouds/100/000000/time-machine.png'}}/>
+        <Text style={styles.buttonText1}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
+        </View>
+        <Text ></Text>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} 
         onPress = {
               () => {
@@ -130,6 +143,26 @@ inputIcon:{
   marginLeft:15,
   justifyContent: 'center'
 },
+  inputContainer1: {
+  backgroundColor: '#FFFFFF',  
+  borderRadius:30,
+  width:400,
+  height:40,
+  marginBottom:20,
+  flexDirection: 'row',
+  alignSelf:'center',
+},
+inputIcon1:{
+  width:50,
+  height:40,
+  marginLeft:15,
+  justifyContent: 'center'
+},
+buttonText1: {
+  color: "#000000",
+  fontSize:23,
+},
+
 
 });
  
