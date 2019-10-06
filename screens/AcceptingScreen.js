@@ -20,25 +20,41 @@ export default class settingscreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
+      name:"Test",
       tracknumber:"EM123456TH",
       date:"07/10/2562",
     };
   }
-  findname(uid){
-    firebase.database().ref('userData/' + uid).on('value',
-            (snapshot) =>{
-             return (snapshot.val().name).toString();
-             });
-  }
+  //  findname = (uid) =>{
+    
+  //   firebase.database().ref('userData/' + uid).once('value')
+  //   .then(function(snapshot){
+  //     if(!snapshot){
+  //       console.log('error occured')
+  //     }
+  //     else{
+  //         let user={
+  //           name: snapshot.val().name
+  //         }
+  //         // console.log(user.name)
+  //         return user.name
+  //   }
+  // });
+  // }
+  // componentWillMount(){
+  //   this.setState({
+  //     nameuser: this.findname(firebase.auth().currentUser.uid)
+  //   })
+  // }
 
-    clickEventListener = (navigation,nameuser) => {
+    clickEventListener = (navigation) => {
           InteractionManager.runAfterInteractions(() => {
-            const uid = firebase.auth().currentUser.uid;
+            const uid = firebase.auth().currentUser.uid;  
+            // console.log('find'+this.findname(uid))          
             firebase.database().ref('ComfirmData/' + uid).set({
-              // name: this.findname(uid),
               tracknumber: this.state.tracknumber,
               date: this.state.date,
+              name: this.state.name,
             }).catch((error) => console.log('AddSigntoDB error: ', error))
           });
       InteractionManager.runAfterInteractions(() => {
@@ -48,10 +64,10 @@ export default class settingscreen extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
         <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
-    
-        <Text style={styles.title}>ชื่อผู้รับพัสดุ: {'\n'}</Text>
+        <Text style={styles.title}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
         <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
         <Text style={styles.title}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
         
