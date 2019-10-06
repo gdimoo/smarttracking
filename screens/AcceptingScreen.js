@@ -83,7 +83,7 @@ export default class settingscreen extends React.Component {
          { this.findname(firebase.auth().currentUser.uid)
         }
 
-        <Image style={styles.icon} source={{uri: "https://img.icons8.com/dusk/64/000000/checked.png"}} />
+        <Image style={styles.icon} source={{uri: "https://cdn2.iconfinder.com/data/icons/logistics-delivery-2-4/64/82-512.png"}} />
         <Text style={styles.title}>ชื่อผู้รับพัสดุ: {this.state.name}{'\n'}</Text>
         <Text style={styles.title}>หมายเลขพัสดุ : {this.state.tracknumber}{'\n'}</Text>
         <Text style={styles.title}>วันที่/เวลา : {this.state.date}{'\n'}</Text>
