@@ -117,10 +117,10 @@ SignStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  // LinksStack,
-  // SettingsStack,
-  // MapStack,
-  // AcceptStack,
+  LinksStack,
+  SettingsStack,
+  MapStack,
+  AcceptStack,
 });
 
 tabNavigator.path = '';
