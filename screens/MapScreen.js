@@ -81,7 +81,7 @@ export default class App extends React.Component {
                 pinColor={this.color}
                         onPress={() => {}}
         onCalloutPress={() => {
-          this.marker.hideCallout();
+          // this.marker.hideCallout();
         }}>
         <Callout style={styles.plainView}
           tooltip={true}>
