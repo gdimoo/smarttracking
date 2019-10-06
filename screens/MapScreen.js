@@ -16,8 +16,8 @@ const { width, height } = Dimensions.get('screen');
 const locations = require('../locations.json');
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
-const roofRef = firebase.database().ref();
-const mapRef = roofRef.child('userData');
+// const roofRef = firebase.database().ref();
+// const mapRef = roofRef.child('userData');
 // const userlocation = firebase.database().ref('userData')
 export default class App extends React.Component {
   state = {
@@ -28,15 +28,15 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {
-    mapRef.on('value',(childSnapshot)=>{
-      const maplist =[];
-      childSnapshot.forEach((oc)=>{
-        maplist.push({
-          key:doc.key,
-          
-        })
-      })
-    })
+    // mapRef.on('value',(childSnapshot)=>{
+    //   const maplist =[];
+    //   childSnapshot.forEach((oc)=>{
+    //     maplist.push({
+    //       key:doc.key,
+
+    //     })
+    //   })
+    // })
     const { status } = await Permissions.getAsync(Permissions.LOCATION)
 
     if (status !== 'granted') {

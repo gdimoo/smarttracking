@@ -28,6 +28,9 @@ const SettingsStack = createStackNavigator({
 const AcceptingStack = createStackNavigator({
 	Accepting: AcceptingScreen
 });
+const MapStack = createStackNavigator({
+	Map: MapScreen
+});
 export default createAppContainer(createSwitchNavigator(
 	{
 		AuthLoading: AuthLoadingScreen,
@@ -35,6 +38,7 @@ export default createAppContainer(createSwitchNavigator(
 		Auth: AuthStack,
 		Signup: SignupStack,
 		Sign: SignStack,
+
 	},
 	{
 		initialRouteName: 'AuthLoading'
